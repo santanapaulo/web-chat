@@ -24,7 +24,7 @@ db.on('connected', function () {
 process.on('SIGINT', function () {
   mongoose.connection.close(function () {
     debug('MongoDB disconnected through app termination');
-    process.exit(0);
+    process.exit(0);    
   });
 });
 
