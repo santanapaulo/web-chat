@@ -22,6 +22,7 @@
   "homepage": "https://gitlab.com/pauloh.santana/web-chat#README",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "debug": "^2.2.0",
     "mongoose": "^4.4.5"
   }
 }
