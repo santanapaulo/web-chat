@@ -2,10 +2,10 @@
 
 var mongoose = require('mongoose')
   , env = require('./env-config')
-  , debug = require('debug')(env.appName + ':db');
+  , debug = require('./debug-config')('db');
 
 // configure a mongoose connection
-mongoose.connect(env.db.uri, env.db.credentials);
+mongoose.connect(env.db.uri);
 
 var db = mongoose.connection;
 
@@ -24,7 +24,7 @@ db.on('connected', function () {
 process.on('SIGINT', function () {
   mongoose.connection.close(function () {
     debug('MongoDB disconnected through app termination');
-    process.exit(0);    
+    process.exit(0);
   });
 });
 
