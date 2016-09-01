@@ -4,55 +4,55 @@ var Person = require('../models/person-model')
   , success = require('../models/success-response-model')
   , ctrl = {};
 
-ctrl.findAll = function(req, res, next) {
+ctrl.findAll = (req, res, next) => {
   Person.findAll()
-    .then(function(persons) {
+    .then((persons) => {
       new success.FindMany(persons).send(req, res);
     })
-    .catch(function(err) {
+    .catch((err) => {
       next(err);
     });
 };
 
-ctrl.findById = function(req, res, next) {
+ctrl.findById = (req, res, next) => {
   Person.findById(req.params.id)
-    .then(function(person) {
+    .then((person) => {
       new success.FindOne(person).send(req, res);
     })
-    .catch(function(err) {
+    .catch((err) => {
       next(err);
     });
 };
 
-ctrl.save = function(req, res, next) {
+ctrl.save = (req, res, next) => {
   Person.save(req.body)
-    .then(function(person) {
+    .then((person) => {
       new success.Inserted(person._id).send(req, res);
     })
-    .catch(function(err) {
+    .catch((err) => {
       next(err);
     });
 };
 
-ctrl.update = function(req, res, next) {
+ctrl.update = (req, res, next) => {
   var person = req.body;
   person._id = req.params.id;
 
   Person.update(person)
-    .then(function(data) {
+    .then((data) => {
       new success.Updated(person._id).send(req, res);
     })
-    .catch(function(err) {
+    .catch((err) => {
       next(err);
     });
 };
 
-ctrl.remove = function(req, res, next) {
+ctrl.remove = (req, res, next) => {
   Person.remove(req.params.id)
-    .then(function(data) {
+    .then((data) => {
       new success.Removed().send(req, res);
     })
-    .catch(function(err) {
+    .catch((err) => {
       next(err);
     });
 };

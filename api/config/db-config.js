@@ -1,28 +1,28 @@
 'use strict';
 
-var mongoose = require('mongoose')
+const mongoose = require('mongoose')
   , env = require('./env-config')
   , debug = require('./debug-config')('db');
 
 // configure a mongoose connection
 mongoose.connect(env.db.uri);
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
 // configure connection listeners
-db.on('connected', function () {
+db.on('connected', () => {
   debug('MongoDB connected.');
-}).on('open', function () {
+}).on('open', () => {
   debug('MongoDB open.');
-}).on('disconnected', function () {
+}).on('disconnected', () => {
   debug('MongoDB disconnected.');
-}).on('error', function (err) {
+}).on('error', (err) => {
   debug('MongoDB error: ' + err);
 });
 
 // configure process listener
-process.on('SIGINT', function () {
-  mongoose.connection.close(function () {
+process.on('SIGINT', () => {
+  mongoose.connection.close(() => {
     debug('MongoDB disconnected through app termination');
     process.exit(0);
   });

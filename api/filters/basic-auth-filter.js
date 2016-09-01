@@ -11,11 +11,11 @@ module.exports = function(req, res, next) {
 
   if(_credentials) {
     User.authenticate(_credentials.name, _credentials.pass)
-      .then(function(user) {
+      .then((user) => {
         debug('User: ' + user);
         req.user = user;
         next();
-      }).catch(function(err) {
+      }).catch((err) => {
         next(new error.AuthorizationRequired(res));
       });
   } else {
